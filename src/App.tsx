@@ -11,8 +11,10 @@ import {
   GraduationCap,
   Linkedin, 
   Mail, 
+  Menu,
   Monitor,
-  Sparkles
+  Sparkles,
+  X
 } from 'lucide-react';
 import { CASE_STUDIES, EXPERTISE, EXPERIENCE } from './constants';
 
@@ -27,28 +29,39 @@ const SCROLL_OFFSET_CLICK = 80;
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
     const handleScroll = () => {
-      const sections = ['home', 'work', 'expertise', 'experience'];
-      const scrollPosition = window.scrollY + SCROLL_OFFSET_ACTIVE;
+      if (timeoutId) clearTimeout(timeoutId);
+      
+      timeoutId = setTimeout(() => {
+        const sections = ['home', 'work', 'expertise', 'experience'];
+        const scrollPosition = window.scrollY + SCROLL_OFFSET_ACTIVE;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section);
+            }
           }
         }
-      }
+      }, 50); // 50ms throttle
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const scrollTo = (id: string) => {
+    setIsMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
@@ -91,7 +104,44 @@ export default function App() {
               Let's Talk
             </a>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden p-2 text-gray-600"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden absolute top-20 left-0 right-0 bg-white border-b border-gray-100 shadow-lg py-4 px-6 flex flex-col space-y-4"
+          >
+            {['Work', 'Expertise', 'Experience'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={(e) => { e.preventDefault(); scrollTo(item.toLowerCase()); }}
+                className={`text-base font-medium transition-colors ${
+                  activeSection === item.toLowerCase() ? 'text-brand-600' : 'text-gray-600'
+                }`}
+              >
+                {item}
+              </a>
+            ))}
+            <a 
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}
+              className="inline-block text-center px-5 py-3 mt-2 bg-gray-900 text-white text-base font-medium rounded-full hover:bg-brand-600 transition-colors"
+            >
+              Let's Talk
+            </a>
+          </motion.div>
+        )}
       </nav>
 
       <main>
