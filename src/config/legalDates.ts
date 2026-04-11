@@ -1,0 +1,2 @@
+export const PRIVACY_LAST_UPDATED = '2025-01-15';
+export const TERMS_LAST_UPDATED = '2025-01-15';
