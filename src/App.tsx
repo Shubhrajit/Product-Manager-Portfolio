@@ -162,7 +162,9 @@ export default function App() {
               I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
             </p>
             <a 
-              href="mailto:shubhrajit.choudhury.2022@iimu.ac.in"
+              href="https://forms.gle/rKi2Ac8KYrztpL5E8"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 px-8 py-4 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition-colors"
             >
               <Mail className="w-5 h-5" />

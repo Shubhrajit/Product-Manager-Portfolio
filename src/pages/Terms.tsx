@@ -64,7 +64,7 @@ export default function Terms() {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">8. Contact</h2>
           <p className="text-gray-600 leading-relaxed">
-            If you have any questions about these Terms, please contact me at: <a href="mailto:shubhrajit.choudhury.2022@iimu.ac.in" className="text-brand-600 hover:underline">shubhrajit.choudhury.2022@iimu.ac.in</a>.
+            If you have any questions about these Terms, please contact me via <a href="https://forms.gle/rKi2Ac8KYrztpL5E8" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">this form</a>.
           </p>
         </section>
       </div>

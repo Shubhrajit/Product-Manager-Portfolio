@@ -2,15 +2,10 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { 
   ArrowRight, 
-  Building2,
   ChevronRight, 
-  Droplet,
   ExternalLink, 
   Github,
-  Globe,
-  GraduationCap,
   Linkedin,
-  Monitor,
   Sparkles
 } from 'lucide-react';
 import { CASE_STUDIES, EXPERTISE, EXPERIENCE } from '../constants';
@@ -86,26 +81,21 @@ export default function Home() {
           <p className="text-center text-sm font-medium text-gray-400 mb-8 uppercase tracking-wider">
             Trusted by & Educated at
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
-            <div className="flex items-center space-x-2 text-gray-400 hover:text-gray-900 transition-colors">
-              <Globe className="w-7 h-7" />
-              <span className="font-display font-bold text-xl">WNS</span>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-20">
+            <div className="flex items-center justify-center h-8 md:h-10 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={`${import.meta.env.BASE_URL}wns.png`} alt="WNS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
             </div>
-            <div className="flex items-center space-x-2 text-gray-400 hover:text-gray-900 transition-colors">
-              <Monitor className="w-7 h-7" />
-              <span className="font-display font-bold text-xl">TCS</span>
+            <div className="flex items-center justify-center h-8 md:h-10 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={`${import.meta.env.BASE_URL}tcs.png`} alt="TCS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
             </div>
-            <div className="flex items-center space-x-2 text-gray-400 hover:text-gray-900 transition-colors">
-              <Droplet className="w-7 h-7" />
-              <span className="font-display font-bold text-xl">Pidilite</span>
+            <div className="flex items-center justify-center h-14 md:h-16 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={`${import.meta.env.BASE_URL}pidilite.png`} alt="Pidilite" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
             </div>
-            <div className="flex items-center space-x-2 text-gray-400 hover:text-gray-900 transition-colors">
-              <Building2 className="w-7 h-7" />
-              <span className="font-display font-bold text-xl">IIM Udaipur</span>
+            <div className="flex items-center justify-center h-16 md:h-20 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={`${import.meta.env.BASE_URL}iimu.png`} alt="IIM Udaipur" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
             </div>
-            <div className="flex items-center space-x-2 text-gray-400 hover:text-gray-900 transition-colors">
-              <GraduationCap className="w-7 h-7" />
-              <span className="font-display font-bold text-xl">SRM IST</span>
+            <div className="flex items-center justify-center h-10 md:h-12 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={`${import.meta.env.BASE_URL}srm.png`} alt="SRM IST" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
             </div>
           </div>
         </div>

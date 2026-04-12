@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
             You have the right to request information about the data we hold about you, or request its deletion. Since we do not store personal data directly on our servers, such requests primarily apply to any direct email correspondence.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            For any privacy-related questions, please contact me at: <a href="mailto:shubhrajit.choudhury.2022@iimu.ac.in" className="text-brand-600 hover:underline">shubhrajit.choudhury.2022@iimu.ac.in</a>.
+            For any privacy-related questions, please contact me via <a href="https://forms.gle/rKi2Ac8KYrztpL5E8" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">this form</a>.
           </p>
         </section>
       </div>
