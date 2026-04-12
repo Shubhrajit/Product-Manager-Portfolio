@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
-  Github, 
-  Linkedin, 
-  Mail, 
   Menu,
   X
 } from 'lucide-react';
@@ -13,6 +10,8 @@ import Home from './pages/Home';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import CookieConsent from './components/CookieConsent';
+import Footer from './components/Footer';
+import { APP_VERSION, VERSION_NOTES } from './constants';
 
 const SCROLL_OFFSET_ACTIVE = 100;
 const SCROLL_OFFSET_CLICK = 80;
@@ -83,13 +82,24 @@ export default function App() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link 
-            to="/" 
-            onClick={() => handleNavClick('home')}
-            className="font-display font-bold text-xl tracking-tight"
-          >
-            SC.
-          </Link>
+          <div className="flex flex-col">
+            <Link 
+              to="/" 
+              onClick={() => handleNavClick('home')}
+              className="font-display font-bold text-xl tracking-tight leading-none"
+            >
+              SC.
+            </Link>
+            <button 
+              onClick={() => handleNavClick('work')}
+              className="text-[10px] text-slate-400 hover:text-brand-600 font-mono mt-1 group relative text-left transition-colors"
+            >
+              {APP_VERSION}
+              <div className="absolute top-full left-0 mt-2 w-48 p-2 bg-brand-900 text-white text-xs rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-sans leading-relaxed">
+                {VERSION_NOTES}
+              </div>
+            </button>
+          </div>
           <div className="hidden md:flex items-center space-x-8">
             {['Work', 'Expertise', 'Experience'].map((item) => (
               <button
@@ -154,34 +164,7 @@ export default function App() {
           <Route path="/terms" element={<Terms />} />
         </Routes>
 
-        {/* Contact/Footer */}
-        <section id="contact" className="py-24 px-6 border-t border-gray-100">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Let's build something great.</h2>
-            <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto">
-              I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            <a 
-              href="https://forms.gle/rKi2Ac8KYrztpL5E8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-8 py-4 bg-brand-600 text-white rounded-full font-medium hover:bg-brand-700 transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              <span>Say Hello</span>
-            </a>
-
-            <div className="mt-32 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-              <p>© {new Date().getFullYear()} Shubhrajit Choudhury. All rights reserved.</p>
-              <div className="flex items-center space-x-6 mt-4 md:mt-0">
-                <Link to="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy</Link>
-                <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
-                <a href="https://www.linkedin.com/in/shubhrajitchoudhury" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">LinkedIn</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">GitHub</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Footer />
       </main>
 
       <CookieConsent />
