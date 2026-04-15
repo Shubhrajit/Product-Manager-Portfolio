@@ -11,6 +11,12 @@ import {
 } from 'lucide-react';
 import { CASE_STUDIES, EXPERTISE, EXPERIENCE } from '../constants';
 
+import wnsLogo from '../assets/wns.png';
+import tcsLogo from '../assets/tcs.png';
+import pidiliteLogo from '../assets/pidilite.png';
+import iimuLogo from '../assets/iimu.png';
+import srmLogo from '../assets/srm.png';
+
 const SCROLL_OFFSET = 80;
 
 export default function Home() {
@@ -88,19 +94,19 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap items-center gap-10 md:gap-16 lg:gap-20">
                 <a href="https://www.wns.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src={`${import.meta.env.BASE_URL}wns.png`} alt="WNS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
+                  <img src={wnsLogo} alt="WNS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
                 <a href="https://www.tcs.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src={`${import.meta.env.BASE_URL}tcs.png`} alt="TCS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
+                  <img src={tcsLogo} alt="TCS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
                 <a href="https://www.pidilite.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-14 md:h-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src={`${import.meta.env.BASE_URL}pidilite.png`} alt="Pidilite" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
+                  <img src={pidiliteLogo} alt="Pidilite" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
                 <a href="https://www.iimu.ac.in/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-16 md:h-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src={`${import.meta.env.BASE_URL}iimu.png`} alt="IIM Udaipur" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
+                  <img src={iimuLogo} alt="IIM Udaipur" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
                 <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-10 md:h-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                  <img src={`${import.meta.env.BASE_URL}srm.png`} alt="SRM IST" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
+                  <img src={srmLogo} alt="SRM IST" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
               </div>
             </div>
