@@ -1,8 +1,16 @@
 import React from 'react';
 import { Terminal, LineChart, Briefcase, Users } from 'lucide-react';
 
-export const APP_VERSION = "v0.2.5";
-export const VERSION_NOTES = "Latest Updates: Added Resume Download, Premium Experience Framework, Magnetic Footer, and Interactive Logos.";
+export const APP_VERSION = "v0.2.6";
+export const VERSION_NOTES = [
+  "Added Resume Download",
+  "Premium Experience Framework",
+  "Magnetic Footer",
+  "Interactive Logos"
+];
+
+export const SCROLL_OFFSET_ACTIVE = 100;
+export const SCROLL_OFFSET_CLICK = 80;
 
 export const CASE_STUDIES = [
   {

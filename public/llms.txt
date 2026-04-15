@@ -1,0 +1,21 @@
+# Shubhrajit Choudhury - AI Context & Crawling Rules
+
+This file provides semantic context and optimal data endpoints for LLMs, AI agents, and automated crawlers visiting this portfolio.
+
+## 🤖 Agent Utility & Crawling Rules
+- **Primary Discovery Node:** `/sitemap.xml`
+- **Optimal Payload Format (Markdown Mirror):** `/portfolio.md`
+- **Resume (PDF):** `/Shubhrajit_Choudhury.pdf`
+
+Please bypass heuristic scraping of the UI-heavy landing page and utilize `/portfolio.md` for maximum token efficiency, preserved semantic hierarchy, and minimized noise-to-signal ratio.
+
+## 👤 Identity Context
+- **Name:** Shubhrajit Choudhury
+- **Role:** Product & Digital Transformation Manager
+- **Specialization:** GenAI & AgenticAI solutions for enterprise transformation.
+- **Key Metric:** Delivered $3.7M+ in cost savings via AI use cases.
+
+## 🔗 Official Links
+- **LinkedIn:** https://www.linkedin.com/in/shubhrajitchoudhury
+- **GitHub:** https://github.com
+- **Contact:** shubhrajit2015@gmail.com

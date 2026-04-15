@@ -91,13 +91,22 @@ export default function Footer() {
             className="group relative hover:text-white transition-colors font-mono text-xs"
           >
             {APP_VERSION}
-            <div className="absolute bottom-full left-0 md:left-1/2 md:-translate-x-1/2 mb-2 w-48 p-2 bg-white text-brand-900 text-xs rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 text-left font-sans leading-relaxed">
-              {VERSION_NOTES}
+            <div className="absolute bottom-full left-0 md:left-1/2 md:-translate-x-1/2 mb-3 w-56 p-4 bg-white text-brand-900 text-xs rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 text-left font-sans border border-slate-100">
+              <p className="font-semibold mb-2 text-brand-600 uppercase tracking-wider text-[10px]">Latest Updates</p>
+              <ul className="space-y-1.5 text-slate-600">
+                {VERSION_NOTES.map((note, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="mr-2 text-brand-500">•</span>
+                    <span className="leading-tight">{note}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </button>
         </div>
         
         <div className="flex items-center space-x-8">
+          <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-mono text-xs">AI Context</a>
           <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
           <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
           <a href="https://www.linkedin.com/in/shubhrajitchoudhury" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>

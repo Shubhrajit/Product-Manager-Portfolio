@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { 
   Menu,
   X
@@ -11,10 +11,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import CookieConsent from './components/CookieConsent';
 import Footer from './components/Footer';
-import { APP_VERSION, VERSION_NOTES } from './constants';
-
-const SCROLL_OFFSET_ACTIVE = 100;
-const SCROLL_OFFSET_CLICK = 80;
+import { APP_VERSION, VERSION_NOTES, SCROLL_OFFSET_ACTIVE, SCROLL_OFFSET_CLICK } from './constants';
 
 // CASE_STUDIES moved to constants.tsx
 
@@ -95,8 +92,16 @@ export default function App() {
               className="text-[10px] text-slate-400 hover:text-brand-600 font-mono mt-1 group relative text-left transition-colors"
             >
               {APP_VERSION}
-              <div className="absolute top-full left-0 mt-2 w-48 p-2 bg-brand-900 text-white text-xs rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-sans leading-relaxed">
-                {VERSION_NOTES}
+              <div className="absolute top-full left-0 mt-2 w-56 p-4 bg-brand-900 text-white text-xs rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-sans border border-slate-800">
+                <p className="font-semibold mb-2 text-brand-200 uppercase tracking-wider text-[10px]">Latest Updates</p>
+                <ul className="space-y-1.5 text-slate-300">
+                  {VERSION_NOTES.map((note, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="mr-2 text-brand-500">•</span>
+                      <span className="leading-tight">{note}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </button>
           </div>
@@ -162,6 +167,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
         <Footer />
