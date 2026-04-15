@@ -1,12 +1,12 @@
 import React from 'react';
 import { Terminal, LineChart, Briefcase, Users } from 'lucide-react';
 
-export const APP_VERSION = "v0.2.6";
+export const APP_VERSION = "v0.2.11";
 export const VERSION_NOTES = [
-  "Added Resume Download",
-  "Premium Experience Framework",
-  "Magnetic Footer",
-  "Interactive Logos"
+  "Fixed GitHub Pages logo rendering",
+  "Resolved TypeScript build errors",
+  "Centralized scroll constants",
+  "Added fallback routing"
 ];
 
 export const SCROLL_OFFSET_ACTIVE = 100;
