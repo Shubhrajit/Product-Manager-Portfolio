@@ -22,8 +22,47 @@ import { APP_VERSION, VERSION_NOTES, SCROLL_OFFSET_ACTIVE, SCROLL_OFFSET_CLICK }
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [versionInfo, setVersionInfo] = useState({
+    version: APP_VERSION,
+    notes: VERSION_NOTES
+  });
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch latest commit for automatic versioning
+    const fetchVersion = async () => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
+        const res = await fetch('https://api.github.com/repos/shubhrajit/Product-Manager-Portfolio/commits/main', {
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!res.ok) {
+          console.warn(`GitHub API returned status: ${res.status}. Using fallback version info.`);
+          return; // Keep default version info from constants
+        }
+        
+        const data = await res.json();
+        if (data && data.sha && data.commit) {
+          const shortSha = data.sha.substring(0, 7);
+          const messageLines = data.commit.message.split('\n').filter((line: string) => line.trim() !== '');
+          setVersionInfo({
+            version: `v-${shortSha}`,
+            notes: messageLines.slice(0, 4) // Show up to 4 lines of the commit message
+          });
+        }
+      } catch (err) {
+        console.warn('Failed to fetch version info, using fallback:', err);
+      }
+    };
+
+    fetchVersion();
+  }, []);
 
   useEffect(() => {
     if (location.pathname !== '/') return;
@@ -91,11 +130,11 @@ export default function App() {
               onClick={() => handleNavClick('work')}
               className="text-[10px] text-slate-400 hover:text-brand-600 font-mono mt-1 group relative text-left transition-colors"
             >
-              {APP_VERSION}
+              {versionInfo.version}
               <div className="absolute top-full left-0 mt-2 w-56 p-4 bg-brand-900 text-white text-xs rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-sans border border-slate-800">
                 <p className="font-semibold mb-2 text-brand-200 uppercase tracking-wider text-[10px]">Latest Updates</p>
                 <ul className="space-y-1.5 text-slate-300">
-                  {VERSION_NOTES.map((note, index) => (
+                  {versionInfo.notes.map((note, index) => (
                     <li key={index} className="flex items-start">
                       <span className="mr-2 text-brand-500">•</span>
                       <span className="leading-tight">{note}</span>
