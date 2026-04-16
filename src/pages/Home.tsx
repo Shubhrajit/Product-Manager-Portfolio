@@ -24,7 +24,7 @@ export default function Home() {
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
-        top: element.offsetTop - SCROLL_OFFSET,
+        top: element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET,
         behavior: 'smooth',
       });
     }
@@ -55,6 +55,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap items-center gap-4 mb-20">
               <button 
+                id="hero-cta-explore"
                 onClick={() => scrollTo('work')}
                 className="px-8 py-4 bg-brand-900 text-white rounded-full font-medium hover:bg-brand-600 transition-colors flex items-center space-x-2 shadow-lg hover:shadow-xl"
               >
@@ -62,6 +63,7 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a 
+                id="hero-cta-resume"
                 href={`${import.meta.env.BASE_URL}Shubhrajit_Choudhury.pdf`}
                 download="Shubhrajit_Choudhury.pdf"
                 className="px-8 py-4 bg-white text-brand-900 border border-brand-200 rounded-full font-medium hover:bg-brand-50 hover:border-brand-300 transition-colors flex items-center space-x-2 shadow-sm hover:shadow-md"
@@ -70,17 +72,21 @@ export default function Home() {
                 <Download className="w-4 h-4" />
               </a>
               <a 
+                id="hero-social-linkedin"
                 href="https://www.linkedin.com/in/shubhrajitchoudhury" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="LinkedIn Profile (opens in a new tab)"
                 className="p-4 text-slate-500 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 rounded-full transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a 
+                id="hero-social-github"
                 href="https://github.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="GitHub Profile (opens in a new tab)"
                 className="p-4 text-slate-500 hover:text-brand-900 bg-brand-50 hover:bg-brand-100 rounded-full transition-colors"
               >
                 <Github className="w-5 h-5" />
@@ -93,19 +99,19 @@ export default function Home() {
                 Trusted by & Educated at
               </p>
               <div className="flex flex-wrap items-center gap-10 md:gap-16 lg:gap-20">
-                <a href="https://www.wns.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <a href="https://www.wns.com/" target="_blank" rel="noopener noreferrer" aria-label="WNS Global Services (opens in a new tab)" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <img src={wnsLogo} alt="WNS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
-                <a href="https://www.tcs.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <a href="https://www.tcs.com/" target="_blank" rel="noopener noreferrer" aria-label="Tata Consultancy Services (opens in a new tab)" className="flex items-center justify-center h-8 md:h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <img src={tcsLogo} alt="TCS" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
-                <a href="https://www.pidilite.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-14 md:h-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <a href="https://www.pidilite.com/" target="_blank" rel="noopener noreferrer" aria-label="Pidilite Industries (opens in a new tab)" className="flex items-center justify-center h-14 md:h-16 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <img src={pidiliteLogo} alt="Pidilite" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
-                <a href="https://www.iimu.ac.in/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-16 md:h-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <a href="https://www.iimu.ac.in/" target="_blank" rel="noopener noreferrer" aria-label="IIM Udaipur (opens in a new tab)" className="flex items-center justify-center h-16 md:h-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <img src={iimuLogo} alt="IIM Udaipur" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
-                <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center h-10 md:h-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener noreferrer" aria-label="SRM Institute of Science and Technology (opens in a new tab)" className="flex items-center justify-center h-10 md:h-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
                   <img src={srmLogo} alt="SRM IST" className="h-full w-auto object-contain" referrerPolicy="no-referrer" />
                 </a>
               </div>
@@ -125,6 +131,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {CASE_STUDIES.map((study, index) => (
               <motion.div 
+                id={`case-study-${study.id}`}
                 key={study.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -169,6 +176,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {EXPERTISE.map((item, index) => (
               <motion.div
+                id={`expertise-card-${index}`}
                 key={item.category}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

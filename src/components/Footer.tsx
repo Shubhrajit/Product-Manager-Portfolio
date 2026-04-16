@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Mail, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { APP_VERSION, VERSION_NOTES } from '../constants';
+import { useAppVersion } from '../hooks/useAppVersion';
 
 export default function Footer() {
   const [time, setTime] = useState<string>('');
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const versionInfo = useAppVersion();
 
   useEffect(() => {
     const updateClock = () => {
@@ -58,10 +59,12 @@ export default function Footer() {
           </p>
           
           <motion.a 
+            id="footer-cta-email"
             ref={buttonRef}
             href="https://forms.gle/rKi2Ac8KYrztpL5E8"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Start a Conversation (opens Google Form in a new tab)"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             animate={{ x: position.x, y: position.y }}
@@ -82,6 +85,7 @@ export default function Footer() {
           <span>Local Time in India: {time}</span>
           <span className="mx-2 text-slate-700">|</span>
           <button 
+            id="footer-version-btn"
             onClick={() => {
               const element = document.getElementById('work');
               if (element) {
@@ -90,11 +94,11 @@ export default function Footer() {
             }}
             className="group relative hover:text-white transition-colors font-mono text-xs"
           >
-            {APP_VERSION}
+            {versionInfo.version}
             <div className="absolute bottom-full left-0 md:left-1/2 md:-translate-x-1/2 mb-3 w-56 p-4 bg-white text-brand-900 text-xs rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 text-left font-sans border border-slate-100">
               <p className="font-semibold mb-2 text-brand-600 uppercase tracking-wider text-[10px]">Latest Updates</p>
               <ul className="space-y-1.5 text-slate-600">
-                {VERSION_NOTES.map((note, index) => (
+                {versionInfo.notes.map((note, index) => (
                   <li key={index} className="flex items-start">
                     <span className="mr-2 text-brand-500">•</span>
                     <span className="leading-tight">{note}</span>
@@ -106,11 +110,11 @@ export default function Footer() {
         </div>
         
         <div className="flex items-center space-x-8">
-          <a href="/llms.txt" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-mono text-xs">AI Context</a>
-          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
-          <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
-          <a href="https://www.linkedin.com/in/shubhrajitchoudhury" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+          <a id="footer-link-ai-context" href="/llms.txt" target="_blank" rel="noopener noreferrer" aria-label="AI Context (opens in a new tab)" className="hover:text-white transition-colors font-mono text-xs">AI Context</a>
+          <Link id="footer-link-privacy" to="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+          <Link id="footer-link-terms" to="/terms" className="hover:text-white transition-colors">Terms</Link>
+          <a id="footer-link-linkedin" href="https://www.linkedin.com/in/shubhrajitchoudhury" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile (opens in a new tab)" className="hover:text-white transition-colors">LinkedIn</a>
+          <a id="footer-link-github" href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile (opens in a new tab)" className="hover:text-white transition-colors">GitHub</a>
         </div>
       </div>
     </section>

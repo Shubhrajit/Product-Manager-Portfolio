@@ -11,7 +11,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import CookieConsent from './components/CookieConsent';
 import Footer from './components/Footer';
-import { APP_VERSION, VERSION_NOTES, SCROLL_OFFSET_ACTIVE, SCROLL_OFFSET_CLICK } from './constants';
+import { SCROLL_OFFSET_ACTIVE, SCROLL_OFFSET_CLICK } from './constants';
+import { useAppVersion } from './hooks/useAppVersion';
 
 // CASE_STUDIES moved to constants.tsx
 
@@ -22,47 +23,9 @@ import { APP_VERSION, VERSION_NOTES, SCROLL_OFFSET_ACTIVE, SCROLL_OFFSET_CLICK }
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [versionInfo, setVersionInfo] = useState({
-    version: APP_VERSION,
-    notes: VERSION_NOTES
-  });
+  const versionInfo = useAppVersion();
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Fetch latest commit for automatic versioning
-    const fetchVersion = async () => {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-        
-        const res = await fetch('https://api.github.com/repos/shubhrajit/Product-Manager-Portfolio/commits/main', {
-          signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!res.ok) {
-          console.warn(`GitHub API returned status: ${res.status}. Using fallback version info.`);
-          return; // Keep default version info from constants
-        }
-        
-        const data = await res.json();
-        if (data && data.sha && data.commit) {
-          const shortSha = data.sha.substring(0, 7);
-          const messageLines = data.commit.message.split('\n').filter((line: string) => line.trim() !== '');
-          setVersionInfo({
-            version: `v-${shortSha}`,
-            notes: messageLines.slice(0, 4) // Show up to 4 lines of the commit message
-          });
-        }
-      } catch (err) {
-        console.warn('Failed to fetch version info, using fallback:', err);
-      }
-    };
-
-    fetchVersion();
-  }, []);
 
   useEffect(() => {
     if (location.pathname !== '/') return;
@@ -120,6 +83,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex flex-col">
             <Link 
+              id="nav-logo"
               to="/" 
               onClick={() => handleNavClick('home')}
               className="font-display font-bold text-xl tracking-tight leading-none"
@@ -127,6 +91,7 @@ export default function App() {
               SC.
             </Link>
             <button 
+              id="nav-version-btn"
               onClick={() => handleNavClick('work')}
               className="text-[10px] text-slate-400 hover:text-brand-600 font-mono mt-1 group relative text-left transition-colors"
             >
@@ -147,6 +112,7 @@ export default function App() {
           <div className="hidden md:flex items-center space-x-8">
             {['Work', 'Expertise', 'Experience'].map((item) => (
               <button
+                id={`nav-item-${item.toLowerCase()}`}
                 key={item}
                 onClick={() => handleNavClick(item.toLowerCase())}
                 className={`text-sm font-medium transition-colors hover:text-brand-600 ${
@@ -157,6 +123,7 @@ export default function App() {
               </button>
             ))}
             <button 
+              id="nav-cta-talk"
               onClick={() => handleNavClick('contact')}
               className="px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-brand-600 transition-colors"
             >
@@ -166,8 +133,12 @@ export default function App() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden p-2 text-gray-600"
+            id="mobile-menu-toggle"
+            className="md:hidden p-3 text-gray-600 -mr-3"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -176,12 +147,14 @@ export default function App() {
         {/* Mobile Navigation Dropdown */}
         {isMobileMenuOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden absolute top-20 left-0 right-0 bg-white border-b border-gray-100 shadow-lg py-4 px-6 flex flex-col space-y-4"
           >
             {['Work', 'Expertise', 'Experience'].map((item) => (
               <button
+                id={`mobile-nav-item-${item.toLowerCase()}`}
                 key={item}
                 onClick={() => handleNavClick(item.toLowerCase())}
                 className={`text-base font-medium transition-colors text-left ${
@@ -192,6 +165,7 @@ export default function App() {
               </button>
             ))}
             <button 
+              id="mobile-nav-cta-talk"
               onClick={() => handleNavClick('contact')}
               className="inline-block text-center px-5 py-3 mt-2 bg-gray-900 text-white text-base font-medium rounded-full hover:bg-brand-600 transition-colors"
             >

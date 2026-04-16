@@ -1,13 +1,17 @@
 import React from 'react';
 import { Terminal, LineChart, Briefcase, Users } from 'lucide-react';
 
-export const APP_VERSION = "v0.2.11";
+export const APP_VERSION = "v0.2.13";
 export const VERSION_NOTES = [
   "Fixed GitHub Pages logo rendering",
   "Resolved TypeScript build errors",
   "Centralized scroll constants",
   "Added fallback routing"
 ];
+
+export const GITHUB_API_URL = 'https://api.github.com/repos/shubhrajit/Product-Manager-Portfolio/commits?per_page=1';
+export const FETCH_TIMEOUT_MS = 5000;
+export const MAX_COMMIT_LINES = 4;
 
 export const SCROLL_OFFSET_ACTIVE = 100;
 export const SCROLL_OFFSET_CLICK = 80;
